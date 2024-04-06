@@ -50,7 +50,7 @@ $(document).ready(function () {
 					 	 ${place.description}
 					 </div>
 					 <div class="reviews">
-					  <h2>Reviews <span class="review-span" data-id"${place.id}">show</span></h2>
+					  <h2>Reviews <span class="review-span" data-id="${place.id}">show</span></h2>
 					  <ul>
 					  </ul>
 					  </div>
@@ -86,20 +86,20 @@ $(document).ready(function () {
 	    $('locations h4').text(Object.values(cityIds).concat(Object.values(stateIds)).join(', '));
     }
   });
-$ ('.review-span').on ('click', function (e) {
+$('.review-span').on('click', function (e) {
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places/' + $(this).attr('data-id') + '/reviews'
   }).done(function (data) {
-   $('span').addClass('hide-review');
-   if ($('.review-span').text('show')) {
-    for (const review of data) {
-     $('.reviews ul').append(`<li>`${review.text}</li>);
-   }
-   $('.hide-review').text('hide'));
+    $('span').addClass('hide-review');
+    if ($('.review-span').text('show')) {
+      for (const review of data) {
+        $('.reviews ul').append(`<li>${review.text}</li>`);
+    }
+    $('.hide-review').text('hide'));
 } else if ($('.hide-review').text('hide')) {
-	$('.reviews ul').empty();
-	$('.reviews-span').text('show');
-  }
-});
-});
+    $('.reviews ul').empty();
+    $('.reviews-span').text('show');
+   }
+  });
+ });
 });
