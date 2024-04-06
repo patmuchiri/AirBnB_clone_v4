@@ -24,12 +24,15 @@ $(document).ready(function () {
     }
   });
 
+  $('.filters button').on('click', function () {
 	$.ajax({
 		type: 'POST',
 		url: 'http://0.0.0.0:5001/api/v1/places_search/',
-		contentType: 'application/json';
-		data: JSON.stringify({}),
+		contentType: 'application/json',
+		data: JSON.stringify({ amenities: Object.keys(amenityIds) }),
 		success: function(data) {
+			$('section.places').empty();
+			$('section.places').append('<h1>');
 			for (const place of data){
 				const myPlace = `<article>
 					 <div class="title_box">
@@ -48,5 +51,6 @@ $(document).ready(function () {
 				$('section.places').append(myPlace);
 			}
 		}
-	})
+	     });
+	});
 });
